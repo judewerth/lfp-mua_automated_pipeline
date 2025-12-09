@@ -146,7 +146,7 @@ for b = 1:numel(batches)
         caxis([min(image_array(:)), prctile(image_array(:), 95)]);
         colorbar;
 
-        title(sprintf("PSD of Frequency Bands (%s)" , organoid))
+        title(sprintf("Normalized PSD of Frequency Bands (%s)" , organoid))
         xlabel(sprintf("Time (%dmin iterations)" , dt))
         xticks(drug_indexs)
         xticklabels(drugs)

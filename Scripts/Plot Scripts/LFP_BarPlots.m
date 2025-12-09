@@ -120,25 +120,25 @@ end
 plot_groups = fieldnames(organoid_average);
 frequency_bands = fieldnames(organoid_average.("organoid"));
 
-for fb = 1:numel(frequency_bands)
-    freq_band = frequency_bands{fb};
-    
-    for pg = 1:numel(plot_groups)
-        plot_group = plot_groups{pg};
-        
-        
-        fq_data = organoid_average.(plot_group).(freq_band);
-        fq_std = organoid_std.(plot_group).(freq_band);
-        
-        if plot_group == "organoid"
-            fq_mean = mean(fq_data);
-        end
-        
-        organoid_average.(plot_group).(freq_band) = fq_data ./ fq_mean;
-        organoid_std.(plot_group).(freq_band) = fq_std ./ fq_mean;
-
-    end
-end
+% for fb = 1:numel(frequency_bands)
+%     freq_band = frequency_bands{fb};
+% 
+%     for pg = 1:numel(plot_groups)
+%         plot_group = plot_groups{pg};
+% 
+% 
+%         fq_data = organoid_average.(plot_group).(freq_band);
+%         fq_std = organoid_std.(plot_group).(freq_band);
+% 
+%         if plot_group == "organoid"
+%             fq_mean = mean(fq_data);
+%         end
+% 
+%         organoid_average.(plot_group).(freq_band) = fq_data;
+%         organoid_std.(plot_group).(freq_band) = fq_std;
+% 
+%     end
+% end
 
 % Plot Data
 % Create the figure and set axis properties
@@ -146,7 +146,7 @@ fig = figure;
 hold on
 title("PSD of LFP Frequency Bands (Control Only)")
 xlabel("Frequency Bands")
-ylabel("Normalized Power Spectral Density (PSD)")
+ylabel("Power Spectral Density (PSD)")
 xticks(x_label_values)
 xticklabels(strrep(features, "_", " "))
 
@@ -189,6 +189,8 @@ for pg = 1:numel(plot_groups)
     end
 end
 
+ax = gca;
+ax.YScale = 'log';
 
 % Create invisible bars for legend
 bar_organoid = bar(nan, nan, 'b');  % Blue bar for organoid
